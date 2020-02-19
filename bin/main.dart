@@ -45,13 +45,13 @@ void   addNode(val) {
 }
 
 
-Node findIntersectingNode(LinkedList list1, LinkedList list2){
+int findIntersectingNode(LinkedList list1, LinkedList list2){
  var currentNode1=list1.head;
  while(currentNode1.next!=null){
    var currentNode2=list2.head;
    while(currentNode2!=null){
      if(currentNode1.val==currentNode2.val) {
-       return currentNode1;
+       return currentNode1.val;
      }
      else{
        currentNode2=currentNode2.next;
@@ -61,7 +61,62 @@ Node findIntersectingNode(LinkedList list1, LinkedList list2){
  }
  return null;
 }
+int findIntersectingNode2(LinkedList list1, LinkedList list2){ // O(m+n) complexity
+  Map m={};
+  var keyFound=false;
+  var currentNode1=list1.head;
+  while(currentNode1.next!=null){
+    m[currentNode1.val]=1;
+    currentNode1=currentNode1.next;
+  }
+  m[currentNode1.val]=1;
+  print(m);
+  var currentNode2=list2.head;
+  while(currentNode2.next!=null){
+    for (var k in m.keys) {
+      if(k==currentNode2.val){
+        m[k]=2;
+        keyFound=true;
+      }
+    }
+    if(!keyFound){
+      m[currentNode2.val]=1;
+    }
+    currentNode2=currentNode2.next;
+  }
+  keyFound=false;
+  for (var k in m.keys) {
+    if(k==currentNode2.val){
+      m[k]=2;
+      keyFound=true;
+    }
+  }
+  if(!keyFound){
+    m[currentNode2.val]=1;
+  }
+  print(m);
+  var answer;
+  for (var k in m.values) {
+    if(k==2){
 
+    }
+  }
+  return answer;
+}
+int findIntersectingNode3(LinkedList list1, LinkedList list2){
+  var currentNode1=list1.head;
+  var currentNode2=list2.head;
+    while(currentNode2!=null){
+      if(currentNode1.val==currentNode2.val) {
+        return currentNode1.val;
+      }
+      else{
+        currentNode2=currentNode2.next;
+        currentNode1=currentNode1.next;
+      }
+    }
+    return null;
+}
 void main(){
   var list1=LinkedList();
   list1.createLinkedList([3,7,8,10]);
@@ -69,11 +124,11 @@ void main(){
   var list2=LinkedList();
   list2.createLinkedList([99,1,8,10]);
   list2.printLinkedList();
-  var intersectingNode=findIntersectingNode(list1,list2);
+  var intersectingNode=findIntersectingNode3(list1,list2);
   if(intersectingNode==null){
     print('No interseting node');
   }
   else {
-    print('Intersecting Node is ='+intersectingNode.val.toString());
+    print('Intersecting Node is ='+intersectingNode.toString());
   }
 }
