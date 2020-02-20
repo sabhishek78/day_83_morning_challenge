@@ -60,17 +60,11 @@ int findIntersectingNode(LinkedList list1, LinkedList list2){ //for lists of une
   var size1=list1.findSize();
   var size2=list2.findSize();
   var difference=(size1-size2).abs();
- if(size1>size2){
-   while(difference>0){
-     currentNode1=currentNode1.next;
-     difference=difference-1;
-   }
- }
- else if(size1<size2){
-   while(difference>0){
-     currentNode2=currentNode2.next;
-     difference=difference-1;
-   }
+
+  while(difference>0){
+   size1>size2?currentNode1=currentNode1.next
+   :currentNode2=currentNode2.next;
+  difference=difference-1;
  }
  while(currentNode2!=null){
      if(currentNode1.val==currentNode2.val) {
